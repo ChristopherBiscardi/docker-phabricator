@@ -1,17 +1,17 @@
-#/bin/bash
+#!/bin/bash
 
-if [ ! -f /var/lib/mysql/ibdata1 ]; then
+# if [ ! -f /var/lib/mysql/ibdata1 ]; then
 
-	echo "init Mysql admin user"
-	killall mysqld
+# 	echo "init Mysql admin user"
+# 	killall mysqld
 
-	mysql_install_db
+# 	mysql_install_db
 
-	mysqld_safe &
-	sleep 10s
+# 	mysqld_safe &
+# 	sleep 10s
 
-	echo "GRANT ALL ON *.* TO admin@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql
-fi
+# 	echo "GRANT ALL ON *.* TO admin@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql
+# fi
 
 cd /opt/libphutil && git pull
 cd /opt/arcanist && git pull
@@ -23,7 +23,7 @@ touch /opt/phabricator/conf/local/local.json
 chmod 666 /opt/phabricator/conf/local/local.json
 
 # if container restart, fix mysql rights
-chown -R mysql:mysql /var/lib/docker
+#chown -R mysql:mysql /var/lib/docker
 
 cd /opt/phabricator && ./bin/storage upgrade --force
 cd /opt/phabricator && ./bin/phd restart
